@@ -1,0 +1,479 @@
+#!/usr/bin/env python
+# coding: utf-8
+we use regular expression for extracting a pattern or matching a pattern in a string or sentence or paragraph.
+real time:
+    email id verification, password matching,phone_no MATCHING ex: 2-333-444-4343(wrong) then isko eliminate krna hai, natural language processing, web scraping technology ex: from a website in a wweb page we can extract phone no etc
+eg:
+ i am mohammad awais with en.no 1600102388 using regular expression i can find the name en.no etc from a large amount of unstructured data
+# In[5]:
+
+
+import re
+string='i am 18 he 22 and she 33'
+matches=re.findall('\d',string)
+print(matches)
+matches=re.findall('\d*',string) # * zero or more
+print(matches)
+matches=re.findall('\d+',string) # + one or more
+print(matches)
+matches=re.findall('\d?',string) # ? zero or one
+print(matches)
+
+
+# In[39]:
+
+
+import re
+string='''hey there i am mohammad awais from chorsand
+jaunpur up and my current city is hyderabad telangana 
+and i m here from 25 days and completing my course on python
+internship as well as python classes i am 22 years old now'''
+matches=re.findall('\d',string)
+print(matches)
+#matches=re.findall('\d*',string)
+#print(matches)
+matches=re.findall('\d+',string)
+print(matches)
+#matches=re.findall('\d?',string)
+#print(matches)
+matches=re.findall('[0-9]',string)
+print(matches)
+#matches=re.findall('.',string)
+#print(matches)
+matches=re.findall('a|b',string)
+print(matches)
+matches=re.findall('(a|b|c|d)a',string)
+print(matches)
+matches=re.findall('\Ahey',string)
+print(matches)
+matches=re.findall('\Znow',string)
+print(matches)
+
+
+# In[45]:
+
+
+import re
+string='one hundread:100 and seven 7'
+result=re.split('\d+',string)
+print(result)
+
+
+# In[46]:
+
+
+import re
+string = 'Twelve:12 Eighty nine:89 Nine:9.'
+pattern = '\d+'
+# maxsplit = 1
+# split only at the first occurrence
+result = re.split(pattern, string, 1) 
+print(result)
+
+
+# In[47]:
+
+
+# Program to remove all whitespaces
+import re
+# multiline string
+string = 'abc 12de 23 \n f45 6'
+# matches all whitespace characters
+pattern = '\s+'
+# empty string
+replace = ''
+new_string = re.sub(pattern, replace, string) 
+print(new_string)
+
+
+# In[48]:
+
+
+import re
+# multiline string
+string = 'abc 12de 23 \n f45 6'
+# matches all whitespace characters
+pattern = '\s+'
+replace = ''
+new_string = re.sub(r'\s+', replace, string, 1) 
+print(new_string)
+
+
+# In[49]:
+
+
+# Program to remove all whitespaces
+import re
+# multiline string
+string = 'abc 12de 23 \n f45 6'
+# matches all whitespace characters
+pattern = '\s+'
+# empty string
+replace = ''
+new_string = re.subn(pattern, replace, string) 
+print(new_string)
+
+
+# In[50]:
+
+
+import re
+string = "Python is fun"
+# check if 'Python' is at the beginning
+match = re.search('\APython', string)
+if match:
+  print("pattern found inside the string")
+else:
+  print("pattern not found")  
+
+
+# In[51]:
+
+
+import re
+string = '39801 356, 2102 1111'
+# Three digit number followed by space followed by two digit number
+pattern = '(\d{3}) (\d{2})'
+# match variable contains a Match object.
+match = re.search(pattern, string) 
+if match:
+  print(match.group())
+else:
+  print("pattern not found")
+
+
+# In[52]:
+
+
+import re
+string = '\n and \r are escape sequences.'
+result = re.findall(r'[\n\r]', string) 
+print(result)
+
+
+# # kernel restart
+
+# In[1]:
+
+
+import re
+nameage='''Ayesha is 18 and Aliya is 16 
+ Atika is 13 and Afiya is 11'''
+nameage
+
+
+# In[2]:
+
+
+ages=re.findall(r'\d{1,3}', nameage) # finding two digit no
+ages
+                
+
+
+# In[3]:
+
+
+names=re.findall(r'[A-Z][a-z]*',nameage) # finding word starts with A-Z and having a-z letters
+names
+
+
+# In[4]:
+
+
+# creating a dictionary names as the key and ages as the value associated with the key
+agedict={}
+x=0
+for eachname in names:
+    agedict[eachname]=ages[x]
+    x+=1
+print(agedict)
+
+
+# In[5]:
+
+
+if re.search('awais',     'yes, i know awais, he is really a nice as well as positive towards me and very kindful'):
+    print('match found in the sentence')
+# searching awais in the following sentence 'yes,......kindful'
+
+
+# In[6]:
+
+
+if re.search('mohammad',     'yes, i know awais, he is really a nice as well as positive towards me and very kindful'):
+    print('match found in the sentence')
+else:
+     print('not found')
+# searching mohammad in the following sentence 'yes,......kindful'
+
+
+# In[7]:
+
+
+if re.search('inform','yes we need to inform the particular information regrding the current scenario'):
+    print('match found')
+else:
+    print('match not found')
+    
+
+
+# In[8]:
+
+
+allword=re.findall('inform','yes we need to inform the particular information regarding the current scenario')
+for i in allword:
+    print(i)
+# inform and information matches with the word inform
+
+
+# In[9]:
+
+
+allword
+
+
+# In[10]:
+
+
+# calculating the index of the word inform matching two times into the string
+str='yes, we need to inform the particular information regarding the current scenario'
+for i in re.finditer('inform',str):
+    create_tuple=i.span()
+    print(create_tuple)
+
+
+# In[11]:
+
+
+str='hat cat sat that '
+allstr=re.findall('[hcst]at',str) # [hcst] means start with these letters []at means end with at
+for i in allstr:
+    print(i)
+
+
+# In[12]:
+
+
+str='hat cat sat that '
+allstr=re.findall('[hCst]at',str) # [hcst] means start with these letters []at means end with at
+for i in allstr:
+    print(i)
+
+
+# In[13]:
+
+
+str='hat cat sat that '
+allstr=re.findall('[hcSt]at',str) # [hcst] means start with these letters []at means end with at
+for i in allstr:
+    print(i)
+
+
+# In[14]:
+
+
+str='hat cat sat that '
+allstr=re.findall('[hcst]a',str) # [hcst] means start with these letters []a means end with a
+for i in allstr:
+    print(i)
+
+
+# In[15]:
+
+
+# print all the word except hat sat ending with at
+str='hat cat sat pat mat'
+somestr=re.findall('[^h,s]at',str)
+for i in somestr:
+    print(i)
+
+
+# # kernel-restart
+
+# In[16]:
+
+
+import re
+
+
+# In[17]:
+
+
+# removing a word from a string and adding another one on that place
+food='hat pat rat mat'
+exclude_rat=re.compile('[r]at')
+food=exclude_rat.sub('beef',food)
+print(food)
+
+
+# In[18]:
+
+
+randstr='here is problem in printing  doble slash \\ponganalu'
+print(randstr)
+print(re.search(r'\\ponganalu',randstr)) # here shows the exact value
+
+
+# In[19]:
+
+
+randstr='''keep the blue
+flag flying
+chelsea'''
+print(randstr) 
+# i want o/p in one line with space in between
+var=re.compile('\n')
+randstr=var.sub(' ',randstr) # passed single space in ' '
+print(randstr)
+
+
+# # SSN,PH_NO Matching
+
+# In[20]:
+
+
+import re
+
+
+# In[21]:
+
+
+randstr='12345'
+print('matches:',len(re.findall('\d',randstr))) # \d only for digits
+
+
+# In[22]:
+
+
+randstr='123455'
+print('matches:',len(re.findall('\d{5}',randstr)))
+# '\d{5}' calculates the first iteration of occurence matlab ki ha 1 barr aya hai
+
+
+# In[23]:
+
+
+num='123 1234 12345 123456 1234567 12345678'
+print('Matches:',len(re.findall('\d{5,7}',num)))
+
+
+# In[24]:
+
+
+# \w [a-z,A-Z,0-9,_] find all these
+# \W [^a-z,A-Z,0-9,_] find all these excluding
+
+
+# In[25]:
+
+
+phn='054-523-8337'
+if re.search('\w{3}-\w{3}-\w{4}',phn):
+    print('it is a valid phone number')
+
+
+# In[26]:
+
+
+phn='05a-abc-def7'
+if re.search('\w{3}-\w{3}-\w{4}',phn):
+    print('it is a valid phone number')
+
+
+# In[27]:
+
+
+phn='054-523-8337'
+if re.search('\d{3}-\d{3}-\d{4}',phn):
+    print('it is a valid phone number')
+else:
+    print('invalid phone no')
+
+
+# In[28]:
+
+
+phn='05a-abc-def7'
+if re.search('\d{3}-\d{3}-\d{4}',phn):
+    print('it is a valid phone number')
+else:
+    print('invalid phone number')
+
+
+# In[29]:
+
+
+# checking the space between the fname and lname
+if re.search('\w{2,20}\s\w{2,20}','mohammad awais'):  # \s means space
+    print('there is space b/w fname and lname')
+
+
+# In[30]:
+
+
+# checking the space between the fname and lname
+if re.search('\w{0,20}\s\w{0,20}','mohammadawais'):  # \s means space
+    print('there is space b/w fname and lname')
+else:
+    print('no space b/w fname and lname')
+
+
+# # email matching
+# kernel restart
+
+# In[31]:
+
+
+import re
+
+
+# In[32]:
+
+
+email='mohdawais@gmail.com mohd@.com m@.com awais@xyz.com awais@-.com m@.com awais@icloud'
+print('matches:',len(re.findall('[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}',email)))
+# [\w._..] means adding in w {1,20} means in b/w 1-20 index @ [\w.-] addong in w after @ {2,20} means in index
+# .[A-Za-z] means having all the words from a-z and A-Z {2,3} means in between 2 and 3
+
+
+# In[33]:
+
+
+e_mail='''mohdawais@iul.ac.in mohdawais0005@gmail.com awaisawais276@gmail.com iossolution05@gmail.com iossolution05@icloud.com
+mo@.com awais-#@gmail.com awais$5%$@gmail-das.com'''
+print('mmatches found:',len(re.findall('[\w]{1,30}@[\w.]{2,20}.[A-Za-z]{2,3}',e_mail)))
+
+
+# # web scraping
+# kernel restart
+https://www.summet.com/dmsi/html/codesamples/addresses.html we have to collect the information from this website
+# In[34]:
+
+
+import urllib.request
+from re import findall
+
+
+# In[ ]:
+
+
+x='https://www.summet.com/dmsi/html/codesamples/addresses.html'
+response=urllib.request.urlopen(x)
+html=response.read()
+htmlstr=html.decode()
+phone_data=findall('\(\d{3}\) \d{3}-\d{4}',htmlstr)
+for i in phone_data:
+    print(i)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
